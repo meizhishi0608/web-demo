@@ -7,7 +7,6 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ===================================================== 封面页 */
-  var watchFilm = document.getElementById("watchFilm");
   var entered = false;
 
   function enterContent() {
@@ -26,23 +25,6 @@
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
       event.preventDefault();
       enterContent();
-    });
-  }
-
-  if (watchFilm) {
-    var toast = document.createElement("p");
-    toast.className = "toast";
-    toast.setAttribute("role", "status");
-    toast.textContent = "影片尚未上传";
-    document.querySelector(".hero").appendChild(toast);
-
-    var toastTimer = null;
-    watchFilm.addEventListener("click", function () {
-      toast.classList.add("is-on");
-      window.clearTimeout(toastTimer);
-      toastTimer = window.setTimeout(function () {
-        toast.classList.remove("is-on");
-      }, 2200);
     });
   }
 
