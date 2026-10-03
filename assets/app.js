@@ -386,14 +386,10 @@
       pages.push(page);
     }
 
-    if (pages.length < 2) {
-      if (bar) bar.setAttribute("hidden", "");
-      return;
-    }
-
     var prev = root.querySelector("[data-pager-prev]");
     var next = root.querySelector("[data-pager-next]");
     var status = root.querySelector("[data-pager-status]");
+    var unit = root.getAttribute("data-pager-unit") || "";
     var current = 0;
 
     var render = function () {
@@ -405,7 +401,12 @@
         }
       });
 
-      if (status) status.textContent = current + 1 + " / " + pages.length;
+      if (status) {
+        status.textContent =
+          pages.length > 1
+            ? current + 1 + " / " + pages.length
+            : "共 " + items.length + (unit ? " " + unit : "");
+      }
       if (prev) prev.disabled = current === 0;
       if (next) next.disabled = current === pages.length - 1;
     };
