@@ -2600,11 +2600,14 @@ body.is-leaving .hero__foot {
 @media (max-width: 900px) {
   .qling__stage { grid-template-columns: minmax(0, 1fr); }
   .persona__stage { max-width: 210px; }
-  .chatbox__window { min-height: min(40vh, 260px); }
 
-  /* 窄屏（形象与对话上下堆叠）：对话区最多占屏幕的七成高，
-     再多的消息在对话区内部滚动，不会让整页越拉越长。 */
-  .chatbox { max-height: min(70vh, 560px); }
+  /* 窄屏（形象与对话上下堆叠）：只给「消息区」设高度上限，多出来的消息在里面滚动；
+     头部、快捷提问、输入框都按自然高度排在下面，永远不会被裁掉。
+     （注意别给整块 .chatbox 设 max-height：卡片是 overflow:hidden 的，
+       一旦「头部 + 消息区 + 快捷提问 + 输入框」略微超出上限，输入框就会被裁掉，
+       手机上会出现"没有输入框、只能点推荐问题"的问题。） */
+  .chatbox { max-height: none; }
+  .chatbox__window { min-height: 0; max-height: min(48vh, 340px); }
 }
 
 /* 桌面版（左形象 / 右对话）：把这一条链上的高度都定下来，
