@@ -1,18 +1,44 @@
 // ============================================================
 //  青翎 · AI 对话接口（Vercel Edge Function）
 //
-//  浏览器 → 这个文件 → 硅基流动 → 把回答一段段流式吐回去
+//  浏览器 → 这个文件 → 模型服务 → 把回答一段段流式吐回去
 //
-//  密钥放在 Vercel 的环境变量 SILICONFLOW_KEY 里，
-//  绝对不要写在这个文件里。
+//  支持两家服务，按环境变量自动选：
+//    · 配了 DEEPSEEK_KEY        → 用 DeepSeek 官方接口（优先）
+//    · 没配，只有 SILICONFLOW_KEY → 用硅基流动的模型
 //
-//  换模型只改下面 MODEL 这一行。
+//  密钥放在 Vercel 的环境变量里（Settings → Environment Variables），
+//  绝对不要写在这个文件里 —— 这个文件是要推到 GitHub 的。
+//
+//  换模型／换服务只改下面 PROVIDERS 里对应的几行。
 // ============================================================
 
 export const config = { runtime: "edge" };
 
-const API_URL = "https://api.siliconflow.cn/v1/chat/completions";
-const MODEL = "Qwen/Qwen2.5-7B-Instruct";     // ←← 只改这一行
+const PROVIDERS = {
+  deepseek: {
+    name: "DeepSeek",
+    url: "https://api.deepseek.com/chat/completions",
+    key: process.env.DEEPSEEK_KEY,
+    /* DeepSeek 官方接口的模型 ID 只有这两个：
+         deepseek-chat      —— 直接回答，快，适合这种游客问答（默认用这个）
+         deepseek-reasoner  —— 先长篇推理再回答，更慢、更贵
+       登录 platform.deepseek.com 的「模型 & 价格」页可以看到当前可用的 ID。 */
+    model: "deepseek-chat",
+    extra: {},
+  },
+  siliconflow: {
+    name: "硅基流动",
+    url: "https://api.siliconflow.cn/v1/chat/completions",
+    key: process.env.SILICONFLOW_KEY,
+    model: "Qwen/Qwen2.5-7B-Instruct",
+    extra: {},
+  },
+};
+
+/* 配了 DeepSeek 的密钥就优先用它，否则回落到硅基流动 —— 两套都配着，随时能切回来 */
+const active = PROVIDERS.deepseek.key ? PROVIDERS.deepseek : PROVIDERS.siliconflow;
+
 const MAX_CHARS = 300;                        // 单条提问最长多少字
 const HISTORY = 6;                            // 带上最近几条上下文
 
@@ -63,8 +89,8 @@ export default async function handler(req) {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
   if (req.method !== "POST") return fail("这个接口只接受 POST 请求。", 405);
 
-  const key = process.env.SILICONFLOW_KEY;
-  if (!key || MODEL.indexOf("填") >= 0) {
+  const key = active.key;
+  if (!key || String(active.model).indexOf("填") >= 0) {
     return fail("接口还没配置好：缺少密钥或模型 ID。", 503);
   }
 
@@ -92,10 +118,17 @@ export default async function handler(req) {
 
   let upstream;
   try {
-    upstream = await fetch(API_URL, {
+    upstream = await fetch(active.url, {
       method: "POST",
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ model: MODEL, messages, stream: true, temperature: 0.6, max_tokens: 500 }),
+      body: JSON.stringify({
+        model: active.model,
+        messages,
+        stream: true,
+        temperature: 0.6,
+        max_tokens: 500,
+        ...active.extra,
+      }),
     });
   } catch {
     return fail("连不上模型服务，请稍后再试。", 502);
@@ -107,7 +140,7 @@ export default async function handler(req) {
     return fail("模型服务返回了错误（" + upstream.status + "）。", 502);
   }
 
-  /* 把硅基流动的 SSE 拆开，只把文字增量原样吐给浏览器 */
+  /* 把模型服务的 SSE 拆开，只把文字增量原样吐给浏览器（两家格式一样） */
   const stream = new ReadableStream({
     async start(controller) {
       const reader = upstream.body.getReader();

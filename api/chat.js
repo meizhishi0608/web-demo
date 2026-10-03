@@ -4,9 +4,11 @@
 //  浏览器 → 这个文件 → 模型服务 → 把回答一段段流式吐回去
 //
 //  支持两家服务，按环境变量自动选：
-//    · 配了 DEEPSEEK_KEY     → 用 DeepSeek 官方接口
-//    · 没配，只有 SILICONFLOW_KEY → 用硅基流动的免费模型
-//  密钥都放在 Vercel 的环境变量里，绝对不要写在这个文件里。
+//    · 配了 DEEPSEEK_KEY        → 用 DeepSeek 官方接口（优先）
+//    · 没配，只有 SILICONFLOW_KEY → 用硅基流动的模型
+//
+//  密钥放在 Vercel 的环境变量里（Settings → Environment Variables），
+//  绝对不要写在这个文件里 —— 这个文件是要推到 GitHub 的。
 //
 //  换模型／换服务只改下面 PROVIDERS 里对应的几行。
 // ============================================================
@@ -18,10 +20,12 @@ const PROVIDERS = {
     name: "DeepSeek",
     url: "https://api.deepseek.com/chat/completions",
     key: process.env.DEEPSEEK_KEY,
-    model: "deepseek-flash",                     // 也可以换成 deepseek-v4-pro（更强、更贵）
-    /* DeepSeek 默认开着"思考模式"，会先长篇推理再回答。
-       这里是游客问答的短对话，关掉它：答得更快，也更省 token。 */
-    extra: { thinking: { type: "disabled" } },
+    /* DeepSeek 官方接口的模型 ID 只有这两个：
+         deepseek-chat      —— 直接回答，快，适合这种游客问答（默认用这个）
+         deepseek-reasoner  —— 先长篇推理再回答，更慢、更贵
+       登录 platform.deepseek.com 的「模型 & 价格」页可以看到当前可用的 ID。 */
+    model: "deepseek-chat",
+    extra: {},
   },
   siliconflow: {
     name: "硅基流动",
