@@ -551,22 +551,15 @@ body.is-leaving .hero__foot {
   text-decoration: none;
 }
 
-.logo__mark { position: relative; width: 28px; height: 17px; }
-
-.logo__mark::before,
-.logo__mark::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 9px;
-  border: 1.6px solid var(--navy);
-  border-color: var(--navy) transparent transparent transparent;
-  border-radius: 50%;
+/* 导航左侧的项目标识（莲花 + 水韵经纬图形标） */
+.logo__mark {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  object-fit: contain;
+  /* 标识是白底图，multiply 让白底融进导航的浅色背景，不出现白方块 */
+  mix-blend-mode: multiply;
 }
-
-.logo__mark::before { top: 2px; }
-.logo__mark::after { top: 7px; opacity: 0.45; }
 
 .logo__text { font-size: 15px; font-weight: 600; letter-spacing: 0.28em; }
 
