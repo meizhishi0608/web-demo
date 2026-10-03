@@ -234,6 +234,20 @@ figure { margin: 0; }
 
 .art__body figure { margin: 2.2em 0; }
 
+/* 两图并排（认识青翎的双形态展示用）：窄屏自动改成上下两张 */
+.art__figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2.5vw, 26px);
+  margin: 2.2em 0;
+}
+
+.art__figures figure { margin: 0; }
+
+@media (max-width: 620px) {
+  .art__figures { grid-template-columns: minmax(0, 1fr); }
+}
+
 figure img {
   width: 100%;
   border-radius: var(--r);
