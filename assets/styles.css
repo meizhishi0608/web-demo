@@ -990,9 +990,14 @@ body.is-leaving .hero__foot {
 
 /* 宽屏上再收一道，避免两块面板变成一大片空白 */
 @media (min-width: 981px) and (min-height: 660px) {
+  /* 中栏正好占满这一行剩下的高度：行高收成 minmax(0,1fr)，
+     里面的卡片、以及「最近更新」的文章列表，都按这个高度来排。
+     （原来这里用 47vh 给中栏压了个上限，中栏比内容矮，右边的文章列表
+     就把整行撑高，两张卡片跟着一起溢出去、底部压到下面的相册带上。） */
   .hub__mid {
-    min-height: min(100%, 38vh);
-    max-height: min(100%, 47vh);
+    min-height: 0;
+    max-height: 100%;
+    grid-template-rows: minmax(0, 1fr);
   }
 }
 
@@ -1000,7 +1005,8 @@ body.is-leaving .hero__foot {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  padding: clamp(16px, 1.8vw, 26px);
+  /* 20px（原来是 26px）：省下的高度留给卡片里的封面图 */
+  padding: clamp(14px, 1.5vw, 20px);
   background: var(--white);
   border: 1px solid var(--rule);
   border-radius: var(--r);
@@ -1156,7 +1162,7 @@ body.is-leaving .hero__foot {
 
 .panel__desc {
   display: block;
-  margin: 12px 0 0;
+  margin: 8px 0 0;
   font-size: 13.5px;
   line-height: 1.75;
   color: var(--navy-2);
@@ -1166,7 +1172,7 @@ body.is-leaving .hero__foot {
 .panel__go {
   display: block;
   margin-top: auto;
-  padding-top: 12px;
+  padding-top: 10px;
   border-top: 1px solid var(--rule);
   font-size: 12.5px;
   letter-spacing: 0.08em;
@@ -3415,17 +3421,17 @@ html:has(.page-doc) { scroll-behavior: smooth; }
   color: var(--mist);
 }
 
-/* ---- 认识青翎：卡片封面上的两张形象 ---- */
-/* 放在标题与底部「阅读全文」之间的空档里：右对齐、按比例缩放。
+/* ---- 左栏两张卡片的封面图（认识青翎 / 与青翎互动） ---- */
+/* 放在标题与底部那行链接之间：右对齐、按比例缩放。
    用 flex:1 1 0 + 绝对定位，卡片高度由外面的格子决定，
-   这张图只会被裁/缩，不会把卡片撑高，也不会破坏「整页一屏」。 */
+   封面只会被缩，不会把卡片撑高，也就不会顶到下面的相册带。 */
 .panel--link { position: relative; overflow: hidden; }
 
 .panel__cover {
   position: relative;
   flex: 1 1 0;
   min-height: 0;
-  margin: 12px 0 10px;
+  margin: 8px 0 6px;
 }
 
 .panel__cover img {
@@ -3437,13 +3443,7 @@ html:has(.page-doc) { scroll-behavior: smooth; }
   object-position: right center;
 }
 
-/* 宽屏时「认识青翎」比下面那张「与青翎互动」略高一点，
-   腾出放形象的地方；两张加起来的高度没变，所以一屏仍然放得下。 */
-@media (min-width: 981px) {
-  .hub__pair { grid-template-rows: 1.3fr 1fr; }
-}
-
-/* 窄屏是上下堆叠、堆叠区可以滑，所以直接给封面一个固定高度，让卡片自己长高 */
+/* 窄屏是上下堆叠、堆叠区本来就能滑，所以直接给封面一个固定高度，让卡片自己长高 */
 @media (max-width: 980px) {
   .panel__cover {
     flex: 0 0 auto;
