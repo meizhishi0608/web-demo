@@ -350,49 +350,84 @@
     probeApi();
   }
 
-  /* ====================================== 相册分页（content.html 的 #album）
-     每页 4 张，只用「上一页 / 下一页」切换，不做无限滚动。 */
-  var album = document.querySelector("[data-album]");
+  /* ====================================== 分页（相册、我们的调查）
+     每页放几条写在容器的 data-per-page 上。页面初始化时把 .pages__page 里的
+     内容按每页条数重新切分，所以以后往列表里加文章 / 加照片，
+     不用自己分页，加够条数就会自动多出一页。只有一页时翻页条收起。 */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-pager]"), function (root) {
+    var bar = root.querySelector(".pager");
+    var template = root.querySelector(".pages__page");
+    if (!template) return;
 
-  if (album) {
-    var albumPages = Array.prototype.slice.call(album.querySelectorAll(".album__page"));
-    var albumPrev = album.querySelector("[data-album-prev]");
-    var albumNext = album.querySelector("[data-album-next]");
-    var albumStatus = album.querySelector("[data-album-status]");
-    var albumIndex = 0;
+    var perPage = parseInt(root.getAttribute("data-per-page"), 10) || 5;
+    var items = [];
 
-    var renderAlbum = function () {
-      albumPages.forEach(function (page, index) {
-        if (index === albumIndex) {
+    /* 先把现有各页里的条目收集起来，再重新分页 */
+    Array.prototype.forEach.call(root.querySelectorAll(".pages__page"), function (page) {
+      Array.prototype.slice.call(page.children).forEach(function (item) {
+        items.push(item);
+      });
+      page.parentNode.removeChild(page);
+    });
+
+    var total = Math.max(1, Math.ceil(items.length / perPage));
+    var pages = [];
+
+    for (var index = 0; index < total; index += 1) {
+      var page = template.cloneNode(false);
+      page.removeAttribute("hidden");
+      page.setAttribute("data-page", String(index + 1));
+
+      items.slice(index * perPage, (index + 1) * perPage).forEach(function (item) {
+        page.appendChild(item);
+      });
+
+      root.insertBefore(page, bar);
+      pages.push(page);
+    }
+
+    if (pages.length < 2) {
+      if (bar) bar.setAttribute("hidden", "");
+      return;
+    }
+
+    var prev = root.querySelector("[data-pager-prev]");
+    var next = root.querySelector("[data-pager-next]");
+    var status = root.querySelector("[data-pager-status]");
+    var current = 0;
+
+    var render = function () {
+      pages.forEach(function (page, i) {
+        if (i === current) {
           page.removeAttribute("hidden");
         } else {
           page.setAttribute("hidden", "");
         }
       });
 
-      if (albumStatus) albumStatus.textContent = albumIndex + 1 + " / " + albumPages.length;
-      if (albumPrev) albumPrev.disabled = albumIndex === 0;
-      if (albumNext) albumNext.disabled = albumIndex === albumPages.length - 1;
+      if (status) status.textContent = current + 1 + " / " + pages.length;
+      if (prev) prev.disabled = current === 0;
+      if (next) next.disabled = current === pages.length - 1;
     };
 
-    if (albumPrev) {
-      albumPrev.addEventListener("click", function () {
-        if (albumIndex > 0) {
-          albumIndex -= 1;
-          renderAlbum();
+    if (prev) {
+      prev.addEventListener("click", function () {
+        if (current > 0) {
+          current -= 1;
+          render();
         }
       });
     }
 
-    if (albumNext) {
-      albumNext.addEventListener("click", function () {
-        if (albumIndex < albumPages.length - 1) {
-          albumIndex += 1;
-          renderAlbum();
+    if (next) {
+      next.addEventListener("click", function () {
+        if (current < pages.length - 1) {
+          current += 1;
+          render();
         }
       });
     }
 
-    renderAlbum();
-  }
+    render();
+  });
 })();

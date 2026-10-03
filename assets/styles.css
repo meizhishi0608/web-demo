@@ -3123,11 +3123,12 @@ html:has(.page-doc) { scroll-behavior: smooth; }
 }
 
 /* =========================================================================
-   相册分页（content.html 的 #album）
-   每页 4 张、2 × 2 排布；只切换哪一页可见，页面本身依旧不滚动。
+   分页：相册（每页 4 张）与「我们的调查」文章列表（每页 5 条）
+   每页条数写在容器的 data-per-page 上；只切换哪一页可见，
+   页面本身依旧不滚动，只有一页时翻页条自动收起。
    ========================================================================= */
 
-.album {
+.pages {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -3135,20 +3136,29 @@ html:has(.page-doc) { scroll-behavior: smooth; }
   margin-top: clamp(14px, 2.2vh, 26px);
 }
 
-.album .album__page {
+.pages .pages__page {
   flex: 1;
   min-height: 0;
   margin-top: 0;
-  /* 两行平均分掉这一栏的高度：窗口变矮时图片跟着缩，不会叠在一起、
-     也不会把下面的翻页条挤出去（原先按 4:3 定高，矮窗口下会溢出）。 */
-  grid-template-rows: repeat(2, minmax(0, 1fr));
+  /* 一页里的内容真的放不下时，让「这一页」自己滚，
+     条目不会溢出去压到下面的翻页条上 */
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
-/* .gallery 写了 display:grid，会盖掉浏览器默认的 [hidden] { display: none } */
-.album__page[hidden] { display: none; }
+/* .gallery 与 .posts 都写了 display，会盖掉浏览器默认的 [hidden] { display: none } */
+.pages__page[hidden] { display: none; }
 
-/* 相册格交给「行高」决定尺寸，照片用 object-fit: cover 填满整格 */
-.album .album__page .slot { aspect-ratio: auto; }
+/* 相册：两行平均分掉这一栏的高度，窗口变矮时图片跟着缩，不会叠在一起，
+   也不会把下面的翻页条挤出去（原先按 4:3 定高，矮窗口下会溢出）。 */
+.album .pages__page { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+
+/* 相册格交给行高决定尺寸，照片用 object-fit: cover 填满整格 */
+.album .pages__page .slot { aspect-ratio: auto; }
+
+/* 「我们的调查」这一栏一页要放下 5 条，行距比首页那份列表收一点，
+   免得第 5 条总是压在翻页条边上；首页的列表不受影响。 */
+#research .pages__page .post { padding-top: 15px; padding-bottom: 15px; }
 
 .pager {
   display: flex;
@@ -3156,10 +3166,12 @@ html:has(.page-doc) { scroll-behavior: smooth; }
   align-items: center;
   justify-content: center;
   gap: 18px;
-  margin-top: clamp(12px, 1.8vh, 18px);
-  padding-top: clamp(10px, 1.5vh, 15px);
+  margin-top: clamp(10px, 1.4vh, 14px);
+  padding-top: clamp(8px, 1.2vh, 11px);
   border-top: 1px solid var(--rule);
 }
+
+.pager[hidden] { display: none; }
 
 .pager__btn {
   padding: 8px 17px;
