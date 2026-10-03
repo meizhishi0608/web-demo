@@ -9,13 +9,18 @@
   /* ===================================================== 封面页 */
   var entered = false;
 
+  /* 转场节奏：幕布升起用 0.8 秒（和 styles.css 里 .veil 的 transition 保持一致），
+     完全升起后再停留 2 秒，让人看清这一屏，然后进入内容界面。 */
+  var VEIL_RISE = 800;
+  var VEIL_HOLD = 2000;
+
   function enterContent() {
     if (entered) return;
     entered = true;
     document.body.classList.add("is-leaving");
     window.setTimeout(function () {
       window.location.href = CONTENT_PAGE;
-    }, reduceMotion ? 0 : 1000);
+    }, reduceMotion ? 0 : VEIL_RISE + VEIL_HOLD);
   }
 
   /* 只有点击「探索白洋淀」按钮才进入内容界面（不再响应鼠标滚动 / 触屏滑动） */
