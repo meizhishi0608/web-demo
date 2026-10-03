@@ -87,6 +87,41 @@ ${RULES}`
 
 export default async function handler(req) {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
+
+  /* 想确认线上到底在用哪家模型？浏览器直接打开 /api/chat?status=1 就会告诉你。
+     只回报"有没有配密钥"，不会泄露密钥内容。 */
+  if (req.method === "GET") {
+    let wantStatus = false;
+    try {
+      wantStatus = new URL(req.url).searchParams.has("status");
+    } catch { /* 拿不到 URL 就当普通请求处理 */ }
+
+    if (wantStatus) {
+      return new Response(
+        JSON.stringify(
+          {
+            ready: Boolean(PROVIDERS.deepseek.key || PROVIDERS.siliconflow.key),
+            provider: active.name,
+            model: active.model,
+            keys: {
+              DEEPSEEK_KEY: Boolean(PROVIDERS.deepseek.key),
+              SILICONFLOW_KEY: Boolean(PROVIDERS.siliconflow.key),
+            },
+          },
+          null,
+          2
+        ),
+        {
+          headers: {
+            ...CORS,
+            "Content-Type": "application/json; charset=utf-8",
+            "Cache-Control": "no-store",
+          },
+        }
+      );
+    }
+  }
+
   if (req.method !== "POST") return fail("这个接口只接受 POST 请求。", 405);
 
   const key = active.key;

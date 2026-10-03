@@ -177,6 +177,7 @@
     var currentForm = "classic";
     var apiReady = false;        // 接口能不能用
     var apiChecked = false;
+    var apiModel = "";           // 接口在用的模型（探测到了就显示出来）
     var history = [];            // 只存在浏览器内存里，刷新即清
     var busy = false;
 
@@ -198,13 +199,23 @@
       return "这个问题我先记下来。现在还没连上大模型，正式接入之后我就能细讲了。";
     }
 
-    /* 探测接口在不在：能返回 405/400 就说明函数部署好了，不用真的调模型 */
+    /* 探测接口在不在：能返回 405 就说明函数部署好了，不用真的调模型。
+       顺便问一下 /api/chat?status=1，把「现在用的是哪家模型」写到状态栏上。
+       旧版接口不认识这个参数，会照旧返回 405，这时候就退回原来的写法。 */
     function probeApi() {
       if (apiChecked) return;
       apiChecked = true;
-      fetch("/api/chat")
+      fetch("/api/chat?status=1")
         .then(function (res) {
           apiReady = res.status !== 404;
+          if (!apiReady) return null;
+          return res.json().catch(function () { return null; });
+        })
+        .then(function (info) {
+          if (!info) { markStatus(); return; }
+          /* 接口报了「没有配密钥」，那就按离线处理 */
+          if (typeof info.ready === "boolean") apiReady = apiReady && info.ready;
+          if (info.model) apiModel = (info.provider ? info.provider + " · " : "") + info.model;
           markStatus();
         })
         .catch(function () {
@@ -215,7 +226,9 @@
 
     function markStatus() {
       if (!chatStatus) return;
-      chatStatus.textContent = apiReady ? "已接入大模型 · 回答由 AI 生成" : "离线演示模式 · 回答来自预置内容";
+      chatStatus.textContent = apiReady
+        ? "已接入大模型 · " + (apiModel ? "回答由 " + apiModel + " 生成" : "回答由 AI 生成")
+        : "离线演示模式 · 回答来自预置内容";
     }
 
     /* 走真接口：服务器返回的是纯文本流，一边收一边显示 */
