@@ -431,4 +431,97 @@
 
     render();
   });
+
+  /* ====================================== 首页看板娘（青翎）
+     站在相册带上方。单击她说一句（下面的数组里轮流取）；
+     右上角的小按钮切换古风 / 科技形态，选过的形态浏览器会记住。
+     想改她说的话，直接改 MASCOT_LINES 里的句子就行。 */
+  var mascot = document.getElementById("mascot");
+
+  if (mascot) {
+    var MASCOT_WELCOME = "欢迎光临，我们一起来探索白洋淀吧";
+    var MASCOT_HOLD_WELCOME = 5000;   // 开场这句停留 5 秒后自动消失（人还在）
+    var MASCOT_HOLD_REPLY = 6500;     // 单击后那句停留多久
+
+    var MASCOT_LINES = {
+      classic: [
+        "想坐船进苇荡吗？从主码头出发，一条水路能转小半天。",
+        "夏天来看荷花，秋天来看芦花飞雪，各有各的好。",
+        "要看青头潜鸭，得挑十一月到第二年三月来。",
+        "王家寨的苇编能自己上手编，编个小篓子带回家。",
+        "雁翎队纪念馆在安新，馆里还留着当年的大抬杆。",
+        "农家院的铁锅炖鱼，早上去吃最新鲜。",
+        "观鸟的时候轻一点、远一点，别把它们惊着了。",
+        "望月岛的日落，太阳落山前后那半小时最好看。",
+        "放荷灯是淀上的老习俗，赶上节庆能碰上。",
+        "走累了就找家农家院坐坐，喝口荷叶茶歇歇脚。",
+        "三条主题线路我都熟，走一天还是两天，你说了算。",
+        "想拍照的话，清晨的芦苇荡有薄雾，最出片。"
+      ],
+      tech: [
+        "素材按点位归类上传，我会自动打好时间、地点和主题标签。",
+        "经营看板每天凌晨同步一次，客流和订单都能看。",
+        "把店铺信息补全，更容易排进主题线路推荐里。",
+        "这个月的经营数据在「经营看板」里，还能按周做对比。",
+        "有新版本我会在这儿提醒你，跟着点两下就好。",
+        "遇到报错，把屏幕上的提示发给我，我帮你定位是哪一步。",
+        "点位信息按生态、红色、民俗三类归档，后面检索更快。",
+        "想接入主题线路，在店铺资料里把对应的线路勾上就行。",
+        "图片素材压在 2000 像素以内，上传更快、也更省空间。",
+        "有想加的点位或玩法告诉我，我帮你补进线路里。"
+      ]
+    };
+
+    var mascotBubble = document.getElementById("mascotBubble");
+    var mascotBody = document.getElementById("mascotBody");
+    var mascotSwitch = document.getElementById("mascotSwitch");
+    var mascotImgs = Array.prototype.slice.call(mascot.querySelectorAll(".mascot__img"));
+    var mascotForm = "classic";
+    var mascotAt = 0;
+    var mascotTimer = null;
+
+    try {
+      if (window.localStorage.getItem("qingling-mascot-form") === "tech") mascotForm = "tech";
+    } catch (error) { /* 隐私模式下读不到 localStorage 也没关系，用默认形态 */ }
+
+    function paintMascot() {
+      mascotImgs.forEach(function (img) {
+        img.classList.toggle("is-active", img.getAttribute("data-form") === mascotForm);
+      });
+    }
+
+    function mascotSay(text, hold) {
+      mascotBubble.textContent = text;
+      mascotBubble.classList.add("is-show");
+      window.clearTimeout(mascotTimer);
+      mascotTimer = window.setTimeout(function () {
+        mascotBubble.classList.remove("is-show");
+      }, hold);
+    }
+
+    if (mascotBody) {
+      mascotBody.addEventListener("click", function () {
+        var list = MASCOT_LINES[mascotForm];
+        mascotSay(list[mascotAt % list.length], MASCOT_HOLD_REPLY);
+        mascotAt += 1;
+      });
+    }
+
+    if (mascotSwitch) {
+      mascotSwitch.addEventListener("click", function () {
+        mascotForm = mascotForm === "classic" ? "tech" : "classic";
+        mascotAt = 0;
+        paintMascot();
+        try { window.localStorage.setItem("qingling-mascot-form", mascotForm); } catch (error) {}
+      });
+    }
+
+    paintMascot();
+    mascot.removeAttribute("hidden");
+
+    /* 进首页先打个招呼，5 秒后这句话自己消失，人留着 */
+    window.setTimeout(function () {
+      mascotSay(MASCOT_WELCOME, MASCOT_HOLD_WELCOME);
+    }, 600);
+  }
 })();

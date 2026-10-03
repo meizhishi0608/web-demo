@@ -3450,3 +3450,152 @@ html:has(.page-doc) { scroll-behavior: smooth; }
     height: clamp(104px, 20vh, 150px);
   }
 }
+
+/* ---- 首页看板娘（青翎） ----
+   放在 .reel 里面、用 bottom:100% 贴住相册带的上沿：
+   相册带的高度随窗口变，这样写永远跟着它走，不会错位。
+   整个看板娘是绝对定位，不占排版位置，所以「整页一屏」不受影响。 */
+.reel { position: relative; }
+
+.mascot {
+  position: absolute;
+  right: clamp(4px, 1.6vw, 34px);
+  bottom: calc(100% + 10px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  z-index: 6;
+}
+
+.mascot[hidden] { display: none; }
+
+.mascot__figure { position: relative; }
+
+.mascot__body {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  filter: drop-shadow(0 12px 20px rgba(22, 35, 63, 0.18));
+  transition: transform 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mascot__body:hover { transform: translateY(-4px); }
+
+.mascot__body:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 5px;
+  border-radius: 12px;
+}
+
+/* 两张图叠在同一处做交叉淡入：当前这张撑起尺寸，另一张绝对定位盖在上面 */
+.mascot__img {
+  display: block;
+  height: clamp(96px, 14vh, 176px);
+  width: auto;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mascot__img.is-active {
+  position: relative;
+  opacity: 1;
+}
+
+.mascot__switch {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--navy);
+  box-shadow: 0 6px 14px rgba(22, 35, 63, 0.14);
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.mascot__switch:hover { transform: scale(1.08); border-color: var(--rule-strong); }
+.mascot__switch svg { width: 16px; height: 16px; }
+
+/* 说话的气泡：默认收起来，加 is-show 才出现；不吃鼠标事件，点穿它点到别处也没问题 */
+.mascot__bubble {
+  position: relative;
+  /* 宽度要卡住：右边这块空地就这么宽（面板右沿到屏幕右沿），
+     气泡再宽就会压到「最近更新」的文章文字上。 */
+  max-width: min(186px, 44vw);
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 10px 24px rgba(22, 35, 63, 0.12);
+  font-size: 12.5px;
+  line-height: 1.68;
+  color: var(--navy-2);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;
+  pointer-events: none;
+}
+
+.mascot__bubble.is-show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* 气泡右下角的小尖角，指向下面的看板娘 */
+.mascot__bubble::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  background: var(--white);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  transform: rotate(45deg);
+}
+
+/* 平板 / 手机：窗口矮，看板娘缩小一点，别挡到卡片 */
+@media (max-width: 980px) {
+  .mascot { right: 10px; bottom: calc(100% + 8px); }
+  .mascot__img { height: clamp(86px, 13vh, 132px); }
+  .mascot__switch { width: 26px; height: 26px; top: -4px; right: -4px; }
+  .mascot__switch svg { width: 14px; height: 14px; }
+  .mascot__bubble { max-width: min(210px, 56vw); font-size: 12.5px; }
+}
+
+/* 13～15 寸笔记本：内容栏几乎顶到屏幕右边，气泡再窄一点，
+   让它只压到滚动条边上，别盖住文章标题 */
+@media (max-width: 1500px) {
+  .mascot__bubble {
+    max-width: min(164px, 40vw);
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+}
+
+/* 系统开了「减少动态效果」就不要再飘了 */
+@media (prefers-reduced-motion: reduce) {
+  .mascot__body,
+  .mascot__img,
+  .mascot__bubble,
+  .mascot__switch { transition: none; }
+  .mascot__body:hover { transform: none; }
+}

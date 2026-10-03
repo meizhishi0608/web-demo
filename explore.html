@@ -251,6 +251,25 @@
 
       </ul>
     </div>
+
+    <!-- 看板娘：站在相册带上方，单击她说句话；右上角小按钮切换古风 / 科技形态。
+         这里是纯装饰 + 互动，不参与排版（绝对定位），所以不会把整页撑高。 -->
+    <div class="mascot" id="mascot" hidden>
+      <p class="mascot__bubble" id="mascotBubble" role="status" aria-live="polite"></p>
+
+      <div class="mascot__figure">
+        <button class="mascot__body" id="mascotBody" type="button" aria-label="点一下，和青翎说句话">
+          <img class="mascot__img is-active" data-form="classic" src="assets/img/mascot-classic.png" alt="" width="355" height="520" />
+          <img class="mascot__img" data-form="tech" src="assets/img/mascot-tech.png" alt="" width="198" height="520" />
+        </button>
+
+        <button class="mascot__switch" id="mascotSwitch" type="button" aria-label="切换青翎的形态" title="切换形态">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 9h10l-3-3M17 15H7l3 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </section>
 
 </main>
