@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>内容界面 · 青翎引路 人淀共生</title>
+<meta name="description" content="白洋淀散点化文旅资源智慧融合与具身传播路径调研" />
+<meta name="theme-color" content="#f5f6f4" />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<!-- 栏目页：每个栏目各占一屏，靠地址栏里的 # 切换。
+     整页 overflow:hidden，所以永远不会出现下滑。 -->
+<body class="page-section">
+
+<header class="topbar" id="topbar">
+  <div class="topbar__inner">
+
+    <a class="logo" href="index.html" aria-label="返回首页">
+      <span class="logo__mark" aria-hidden="true"></span>
+      <span class="logo__text">水 韵 经 纬</span>
+    </a>
+
+    <nav class="menu" aria-label="主导航">
+      <ul class="menu__list" id="menuList">
+        <li><a href="explore.html">首页</a></li>
+        <li><a href="content.html#overview">项目概况</a></li>
+
+        <li class="menu__item--has-menu">
+          <a href="content.html#research">
+            我们的调查
+            <span class="caret" aria-hidden="true"></span>
+          </a>
+          <div class="menu__panel">
+            <a href="content.html#research">文章</a>
+            <a href="content.html#album">相册</a>
+          </div>
+        </li>
+
+        <li class="menu__item--has-menu">
+          <a href="philosophy.html">
+            人淀共生理念
+            <span class="caret" aria-hidden="true"></span>
+          </a>
+          <div class="menu__panel">
+            <a href="philosophy.html#concept">核心理念</a>
+            <a href="philosophy.html#scatter">散点融合</a>
+            <a href="philosophy.html#agent">青翎智能体</a>
+            <a href="philosophy.html#immersive">沉浸场景</a>
+            <a href="philosophy.html#theory">理论支撑</a>
+          </div>
+        </li>
+        <li><a href="content.html#resources">白洋淀特色资源库</a></li>
+        <li><a href="content.html#qingling">青翎AI交互中心</a></li>
+        <li class="menu__item--has-menu">
+          <a href="routes.html">
+            旅游路线推荐
+            <span class="caret" aria-hidden="true"></span>
+          </a>
+          <div class="menu__panel menu__panel--routes">
+            <a href="routes.html#eco">生态民俗体验线</a>
+            <a href="routes.html#red">红色生态研学线</a>
+            <a href="routes.html#bird">现代湿地科技观鸟线</a>
+          </div>
+        </li>
+        <li><a href="content.html#team">团队介绍</a></li>
+        <li class="menu__item--has-menu">
+          <span class="menu__trigger" tabindex="0">
+            联系我们
+            <span class="caret" aria-hidden="true"></span>
+          </span>
+          <div class="menu__panel menu__panel--contact">
+            <a class="contact" href="mailto:2981128557@qq.com">
+              <span class="contact__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+                  <path d="M3.4 6.8 12 12.6l8.6-5.8" />
+                </svg>
+              </span>
+              <span class="contact__text">
+                <span class="contact__label">QQ邮箱</span>
+                <span class="contact__hint">2981128557@qq.com</span>
+              </span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <a class="btn btn--ghost" href="explore.html">
+      <span>返回首页</span>
+      <span class="btn__arrow" aria-hidden="true">↖</span>
+    </a>
+
+    <button class="topbar__toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menuList" aria-label="展开导航">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+
+  </div>
+</header>
+
+<main class="screens">
+
+  <!-- 01 项目概况 -->
+  <section class="screen screen--reading" id="overview" aria-label="项目概况">
+    <div class="reading">
+      <article class="prose">
+
+        <div class="abstract">
+          <p class="abstract__label">摘要</p>
+          <p>当前白洋淀正处于从生态修复向保护利用并重转型的阶段，但本地生态、红色、民俗资源长期处于富集却分散的状态。基于 127 份有效问卷和实地走访，调研发现 88.64% 的游客仅以生态观光为首要目的，红色研学占比仅 9.09%，特色商品消费不足 23%，供需错位明显，人淀共生理念尚未在产业层面有效落地。通过问卷抽样、深度访谈等实证方法，进一步梳理出白洋淀文旅在产品场景、产业价值、品牌传播等方面相互割裂的结构性矛盾。</p>
+          <p>针对上述问题，本作品提出以虚拟数字人智能体青翎为核心的人淀共生文旅价值重塑方案。青翎设有古风与科技两种形态，能够承担资源整合、理念传播、技术应用、体验优化、利益协调与全域推广六大职能，形成从资源整理、智能转化到实地体验的完整链路。配套生态民俗、红色生态研学、湿地观鸟三条游览线路，贯通行前、行中、行后全周期服务，并通过政企社协同保障、分阶段迭代规划以及针对技术迭代、初期引流、社区参与等潜在风险制定应对策略。本方案可为白洋淀及国内同类复合型湿地景区的文旅价值转化提供可借鉴的实践路径，推动具身传播在文旅场景中的落地应用。</p>
+        </div>
+
+          <h2>研究背景</h2>
+
+          <h3>政策背景</h3>
+
+        <p>党的二十届四中全会审议通过的《中共中央关于制定国民经济和社会发展第十五个五年规划的建议》明确提出要“加快经济社会发展全面绿色转型，建设美丽中国”，并将“激发全民族文化创新创造活力，繁荣发展社会主义文化”作为战略任务进行部署。雄安新区作为国家重大战略承载地，其生态治理与文旅发展高度契合这一政策导向，为白洋淀从生态保护走向生态价值转化提供了坚实的政策依据。2017 年 4 月，雄安新区设立，这是以习近平同志为核心的党中央作出的重大历史性战略选择。白洋淀作为雄安新区最重要的生态水体，总面积 366 平方公里，素有“华北明珠”“华北之肾”之誉。习近平总书记三次亲临雄安视察，多次就白洋淀生态治理和保护作出重要指示批示，提出一系列明确要求。</p>
+
+        <p>近年来，雄安新区深入实施“五大工程”和“五个一体化”，白洋淀水质历史性好转，水乡韵味更浓，防洪能力更强，相关工作取得良好成效。2025 年 8 月，雄安新区召开白洋淀旅游环境整治提升工作现场会，明确指出白洋淀“正从治理修复为主向保护利用并重阶段转变”。这一转变意味着，白洋淀的发展重心正从单纯的生态保护走向生态价值与文旅价值的协同转化，如何在保护生态环境的基础上实现文旅资源的有效开发，成为新区建设面临的重要课题。</p>
+
+          <h3>行业背景</h3>
+
+        <p>党的二十大报告明确提出“坚持以文塑旅、以旅彰文，推进文化和旅游深度融合发展”。在数字技术与体验经济的双重驱动下，文旅产业正经历从传统观光向沉浸式体验的范式转变。根据《中国文化旅游发展报告 2024—2025》，文旅发展呈现明显的层级递进特征：1.0 阶段以标识性符号为核心，2.0 阶段以互联网平台（如小红书、抖音）为核心，3.0 阶段则是以 AI 智能体为核心。依托大数据用户画像、虚拟现实（VR）／增强现实（AR）虚实共生场景构建、人工智能内容生成（AIGC）等具体技术路径，原本受限于物理空间、呈现分散状态的文旅资源，得以通过云端聚合、场景重构与多模态交互（如视听触嗅等多感官体验）进行创新呈现。[1] 白洋淀地处京津冀协同发展核心区域，正处于向 3.0 阶段迈进的关键窗口期，这也是本研究探讨其数字化路径的现实基点。然而，数字技术的深度介入也带来了新的现实挑战：如何避免“重技术轻文化”的倾向，如何在流量逻辑中保持文化深度与在地性，防止旅游体验走向同质化，成为数字文旅高质量发展的核心问题。这对于拥有丰富生态与民俗资源的白洋淀而言，既是重要的时代机遇，也是需要正视的发展门槛。</p>
+
+          <h3>现实背景</h3>
+
+        <p>白洋淀文旅产业拥有高质量转型与资源整合需求。白洋淀作为华北平原最大的淡水湖泊，在雄安新区设立后，生态修复工程取得显著成效，水质提升和生物多样性恢复为文旅产业发展奠定了坚实的环境基础。近年来，依托“生态＋红色＋民俗”的复合资源禀赋，白洋淀旅游经济整体呈现稳中向好的发展态势，已成为京津冀地区重要的生态旅游目的地。</p>
+
+        <p>现阶段，白洋淀文旅产业正处于从传统观光游向深度体验游的转型期。随着国内旅游消费市场的不断升级，游客的出游动机已从单纯的风景观赏转向对在地文化、情感共鸣和沉浸体验的多元追求。在京津冀协同发展和雄安新区建设的时代背景下，白洋淀不仅承载着区域生态屏障的功能，更面临着从“生态治理”向“生态价值转化”跨越的现实任务。</p>
+
+        <p>在此过程中，如何将白洋淀深厚的自然生态、红色文化与民俗非遗资源进行系统性的整合开发，适应年轻客群对数字化、具身化旅游产品的消费偏好，成为推动区域文旅产业高质量发展的关键。这一现实境况，对创新文旅供给模式、重塑主客关系、实现区域经济与生态保护的良性互动，提出了迫切的时代要求。</p>
+
+        <p>在上述背景下，如何将白洋淀散点化的文旅资源整合为系统化的文旅产品，如何通过具身传播路径构建游客与在地文化的深度联结，如何实现“人淀共生”的可持续发展，成为本研究的核心关切。这也正是本课题选题的现实起点与理论旨归。</p>
+
+          <h2>研究目的与意义</h2>
+
+          <h3>研究目的</h3>
+
+        <p>本研究以白洋淀文旅资源为研究对象，旨在实现以下目标：</p>
+
+        <ul class="points">
+          <li>第一，系统梳理白洋淀文旅资源的“家底”与开发现状。通过对生态湿地资源、红色文化资源、民俗非遗资源的分类盘点，明确各类资源的分布特征、开发程度与转化瓶颈，为后续价值重塑提供基础。</li>
+          <li>第二，深入诊断白洋淀文旅发展面临的深层矛盾。从游客体验、产业运营、品牌传播、生态保护四个维度，分析当前文旅发展面临的供需错位、资源孤岛化、文化传播散点化、生态保护与开发博弈等问题，揭示白洋淀文旅发展的结构性困境。</li>
+          <li>第三，探索“人淀共生”理念下文旅资源价值重塑的可行路径。基于具身传播理论与数字技术手段，构建“文化资源—数字转化—具身体验”的系统框架，为白洋淀文旅产品设计、传播策略优化与产业模式创新提供针对性的对策建议。</li>
+        </ul>
+
+          <h3>理论意义</h3>
+
+        <ul class="points">
+          <li>其一，丰富具身传播理论在文旅领域的应用场景。现有具身传播研究多停留在概念阐释与机制描述层面，缺乏针对具体地域场景的实证检验。本研究以白洋淀为案例，将具身传播理论落位于“生态＋红色＋民俗”复合型文旅资源的转化实践，有助于拓展具身传播理论的解释力与应用边界。</li>
+          <li>其二，深化对“人淀共生”理念的理论内涵阐释。本研究尝试将“人淀共生”从生态哲学概念转化为可操作的分析框架，从生态共生、文化共生、主客共生三个维度进行系统界定，为理解人与自然和谐共生、文旅可持续发展提供理论参照。</li>
+          <li>其三，丰富复合型文旅资源价值重塑的研究视角。现有文旅 IP 研究多聚焦于单一文化资源或单一营销策略，对多重复合型资源如何进行系统整合，尚缺乏成熟的分析框架。本研究从“散点化到人淀共生”的分析路径出发，为同类生态文旅景区的资源整合提供理论参考。</li>
+        </ul>
+
+          <h3>实践意义</h3>
+
+        <ul class="points">
+          <li>其一，为白洋淀文旅产业高质量发展提供决策参考。本研究基于一手调研数据，揭示白洋淀文旅发展的痛点与瓶颈，提出具有针对性的对策建议，可为雄安新区文旅主管部门制定产业发展政策提供参考。</li>
+          <li>其二，为白洋淀文旅资源的数字化传播提供可操作方案。研究提出的具身传播路径设计、数字交互工具开发思路以及主题旅游路线规划，可直接应用于白洋淀文旅产品的创新与提升，助力打造“雄安特色”与“白洋淀文化底蕴”相融合的文旅体验。</li>
+          <li>其三，为同类生态文旅景区提供可借鉴的转型样本。白洋淀作为华北地区重要的生态文旅地标，其从资源散点化走向系统整合的转型实践，可为全国其他具有“生态＋文化”复合资源特征的景区提供经验借鉴与模式参考。</li>
+        </ul>
+
+          <h2>文献综述</h2>
+
+        <p>文化和旅游深度融合与数字技术发展的双重背景下，文旅体验的范式正发生深刻变革。当下文旅传播呈现出全新的场景特征：传统文旅 IP 以“凝视”为主，游客依靠视觉感知与单向观察获取文化信息，这种模式难以唤起情感共鸣。而当前的体验范式正在向“沉浸”转变，其核心在于借助具身传播打破视觉中心主义，将受众的身体作为叙事载体（陈博、吴闯，2026）。</p>
+
+        <p>在数字传播赋能文旅的路径层面，已有研究表明轻量化、交互式的服务创变是核心手段。例如，数字文旅通过精准的信息架构和功能设计，可实现从单向传播到沉浸交互的转变，并构建“技术—内容—用户”的生态闭环（吕强、王昕，2025）。基于 1947 条文旅短视频的实证分析显示，体验框架能显著正向影响受众的点赞、评论和转发行为，且“喜爱”情绪在体验框架与信息分享行为之间起到中介作用（陈璟浩、贾枫，2025）。此外，在跨文化传播中，展现“亲情、友情、爱情”等普遍情感可以跨越文化壁垒（燕道成、易靖雅，2025）。然而，数字媒介的应用并非全无隐忧，已有研究从符号学视角指出，符号的“奇观化”转译可能遮蔽文化的真实内涵，文旅传播需要从“符号消费”向多元主体参与的“意义共创”转变（郭学军、崔书鑫，2025）。</p>
+
+        <p>在情感价值与 IP 建构层面，情绪价值已成为文旅 IP“出圈”的底层逻辑（王林生、金元浦，2025）。在体验经济背景下，情绪价值已取代单纯的景观欣赏成为核心驱动力，情感经济将流量关注转化为深度文化认同。在具体 IP 开发模式上，学界提出了虚实共生的目的地文旅 IP 开发路径，需先利用数字媒介构建虚拟互动场域，再通过技术重构线下体验场景（蔡礼彬、鲁懿慧，2026）。文旅企业需要经历“滋养吸收—活化转化—反哺增强”的循环过程（梁学成等，2026）。</p>
+
+        <p>聚焦白洋淀这一特定地域空间，基于“物质—社会—文化”多维空间框架的案例研究揭示了水域村落面临的转型重构困境（高璟、刘鲁，2024）；从生态系统服务角度的研究则强调了不同利益相关者对空间功能的偏好差异（周昱辰等，2022）；基于“流动性”视角的研究表明，数字传播通过符号流、物质流与情感流的相互依存，重塑了地方空间与产业逻辑（王斌、路文廷，2026）。</p>
+
+        <p>综合以上文献可以发现，尽管学界在具身传播、情绪价值、数字媒介赋能以及文旅 IP 的系统建构等方面取得了丰硕成果，但仍存在亟待填补的研究缺口。其一，现有案例多聚焦于单一文化资源（如敦煌、洛阳），对于白洋淀这种同时兼具“生态湿地”与“红色底蕴”的复合型资源，其散点化困境与价值重塑路径缺乏系统研究；其二，具身传播理论在文旅领域多停留在机制阐释，缺乏针对具体地域场景的实证检验和落地路径设计；其三，现有研究多注重单一维度的传播效果或产品开发，较少有研究从“人淀共生”这一体现人与自然和谐共生的复合维度出发，构建涵盖“物质—社会—文化”多维空间与虚实场景的整合性分析框架。这也正是本研究尝试以白洋淀为例，探究其文旅资源从“散点化”走向“人淀共生”的价值重塑与具身传播路径的学术价值和现实意义所在。</p>
+
+          <h2>研究设计与技术路线</h2>
+
+          <h3>调研对象分层设计</h3>
+
+        <p>参考国内湿地文旅多主体调研范式，结合白洋淀“生态—红色—民俗”复合资源的特征，兼顾需求端、供给端、管理端，设置不同调研对象，规避仅调研游客所造成的样本偏差。实地调研采样覆盖白洋淀不同功能片区与典型点位，为后续主题路线的归纳提炼提供现实依据。</p>
+
+        <figure class="figure">
+          <a href="assets/img/overview-layers.png" target="_blank" rel="noopener" title="点击查看原图">
+            <img src="assets/img/overview-layers.png" alt="调研对象分层以及对应问题" />
+          </a>
+        </figure>
+
+        <ul class="points">
+          <li>（1）游客群体：包含生态观光、红色研学、家庭休闲、湿地科普摄影等不同类型游客，覆盖自驾、公共交通不同出行方式。样本采集分别来自民俗村落、红色展馆、湿地科普观测点等不同点位，对应后续三条主题路线的目标客群，重点收集游玩体验、消费偏好、重游意愿、对数字化服务的期待。</li>
+          <li>（2）本地居民群体：涵盖王家寨、望月岛、邵庄子等淀内及周边村落的常住居民与外流返乡和在外务工流出人口两类。针对常住居民，重点调研生态治理对家庭生计带来的影响、民俗技艺传承现状、参与文旅发展的主观诉求；针对淀区流出人口，重点探究其当年外出择业的核心动因（收入不足、发展机会有限等）、对家乡白洋淀生态与文旅变化的认知评价，以及是否存在返乡就业、参与淀区文旅与文化传承的潜在意愿。</li>
+          <li>（3）农林牧副渔商户群体：包含农家院经营者、游船运营主体、土特产与文创从业者等淀区经营主体，重点调研其日常经营现实难点、行业同质化竞争情况、新媒体宣传运营存在的短板，以及对虚拟数字人等智慧文旅新业态的认知与接受程度。</li>
+          <li>（4）景区管理者群体：景区工作人员、各个点位讲解员，梳理现有游览线路、基础设施短板、当前数字化落地遇到的现实困难，一手素材来自团队在雁翎队纪念馆等地的实地访谈。</li>
+          <li>（5）文旅主管部门相关人员：雄安新区、安新县文旅、生态环境基层工作人员，了解政策红线约束、区域文旅数字化建设规划方向。</li>
+        </ul>
+
+          <h3>研究假设</h3>
+
+        <p>结合文献梳理、相关理论以及前期预调研，提出三条研究假设：</p>
+
+        <ul class="points points--hypo">
+          <li><strong>H1：</strong>当前白洋淀文旅存在资源散点化、服务供给错配，人淀共生理念停留在政策文本，在产业层面落地不足的现实矛盾；</li>
+          <li><strong>H2：</strong>以虚拟数字人智能体作为新型媒介中介，能够整合白洋淀分散的生态、红色、渔家民俗文化资源，缓解资源孤岛、供给散点化问题；</li>
+          <li><strong>H3：</strong>基于人淀共生理念的 AI 智能体赋能模式，可以同时实现游客体验升级、本地居民与商户利益保障，推动人淀共生从政策文本走向文旅产业实践。</li>
+        </ul>
+
+          <h3>技术路线</h3>
+
+        <p>本研究整体流程分为“前期文献与政策准备阶段→实地调研与多源数据采集阶段→数据处理与现实问题诊断阶段→顶层理念与虚拟数字人智能体模型构建阶段→分层落地路径设计阶段→综合结论撰写与示范价值提炼阶段”六大阶段。</p>
+
+        <figure class="figure">
+          <a href="assets/img/overview-flow.png" target="_blank" rel="noopener" title="点击查看原图">
+            <img src="assets/img/overview-flow.png" alt="研究整体流程图" />
+          </a>
+        </figure>
+
+        <ul class="points">
+          <li>（1）前期文献与政策准备阶段：收集白洋淀相关官方政策文件；梳理湿地文旅、人地共生、AI 文旅、场景传播、参与式文化等相关期刊、学位论文；界定核心概念，确立理论基础；设计游客版、居民、商户、管理者多版本问卷，编写半结构化访谈提纲，确定网络舆情检索关键词。同时结合文献与预调研，梳理白洋淀资源点位基础信息，为三条主题游览路线的客群定位、点位筛选做好前期铺垫。</li>
+          <li>（2）实地调研与多源数据采集阶段：团队实地走访覆盖后续路线全部候选实地点位，包含白洋淀主码头、王家寨、望月岛、邵庄子、雁翎队纪念馆、荷花大观园、鸟类科普馆、缓冲区观鸟平台、生态监测观测点、悦容公园。在上述点位开展问卷发放、深度访谈、参与式观察；在主流社交平台采集网络评论，完成多源一手资料收集。</li>
+          <li>（3）数据处理与现实问题诊断阶段：使用问卷星软件完成问卷录入、信效度检验、描述统计、交叉分析；对访谈录音进行文字转录；对网络评论做清洗、情感统计、高频词提取；结合雁翎队纪念馆、王家寨民俗渔村的典型案例，完成第三部分问题诊断。通过数据结果印证现有游览模式固化、资源孤岛、不同客群需求得不到满足等现实痛点，论证开发多条差异化主题游览路线的现实必要性。</li>
+          <li>（4）顶层理念与虚拟数字人智能体模型构建阶段：围绕人淀共生三重内涵，结合场景传播、参与式文化理论，明确文旅 AI 智能体的媒介定位，搭建“文化资源层—智能体转化层—具身体验层”三层联动模型。模型内部，文化资源层完成三类路线所需点位素材、口述史料、科普资料的入库整理；智能体转化层承担行程生成、点位叙事讲解、交互内容输出功能；具身体验层作为对外输出端口，可同时承载“生态民俗体验线、红色—生态研学线、现代湿地科技观鸟线”三条主题游览路线，由 AI 智能体统一完成叙事串联。</li>
+        </ul>
+
+        <figure class="figure">
+          <a href="assets/img/overview-model.png" target="_blank" rel="noopener" title="点击查看原图">
+            <img src="assets/img/overview-model.png" alt="文旅AI智能体三层联动模型" />
+          </a>
+        </figure>
+
+      </article>
+    </div>
+    <p class="screen__foot">青翎引路 · 人淀共生</p>
+  </section>
+
+  <!-- 02 我们的调查 -->
+  <section class="screen" id="research" aria-label="我们的调查">
+    <div class="screen__grid">
+      <div>
+        <p class="section__index">02</p>
+        <h1 class="screen__title">我们的调查</h1>
+      </div>
+      <div class="screen__body">
+        <p class="lead">调查过程、调研记录与影像产出集中在这里，按时间倒序排列。点击标题阅读全文。</p>
+         <ol class="posts screen__list">
+           <li>
+             <a class="post" href="articles/01-重访白洋淀.html">
+               <span class="post__date">2026.08</span>
+               <span class="post__title">重访白洋淀：在苇荡烟火间，寻找资源共生的答案</span>
+               <span class="post__sum">第二轮递进式调研手记——水清鸟归之后，文旅还卡在哪些地方。</span>
+               <span class="post__arrow" aria-hidden="true">→</span>
+             </a>
+           </li>
+           <li>
+             <a class="post" href="articles/02-专访一-淀边农家院经营者.html">
+               <span class="post__date">2026.08</span>
+               <span class="post__title">专访一｜淀边农家院经营者：守着一淀好水，却跨不过数字化的坎</span>
+               <span class="post__sum">旺季门庭若市、淡季门可罗雀，线上运营成了本土商户跨不过的一道坎。</span>
+               <span class="post__arrow" aria-hidden="true">→</span>
+             </a>
+           </li>
+           <li>
+             <a class="post" href="articles/03-专访二-纪念馆讲解员.html">
+               <span class="post__date">2026.08</span>
+               <span class="post__title">专访二｜纪念馆讲解员：芦苇荡不只是风景，更是雁翎队生长的战场</span>
+               <span class="post__sum">为什么「馆内看历史、户外看风景」的两套流程，读不懂同一片芦苇荡。</span>
+               <span class="post__arrow" aria-hidden="true">→</span>
+             </a>
+           </li>
+           <li>
+             <a class="post" href="articles/04-专访三-淀中村民.html">
+               <span class="post__date">2026.08</span>
+               <span class="post__title">专访三｜淀中村民：碧水看得见，期盼普通百姓共享文旅的烟火红利</span>
+               <span class="post__sum">生态变好之后，普通村民如何参与并分享水乡发展的机会。</span>
+               <span class="post__arrow" aria-hidden="true">→</span>
+             </a>
+           </li>
+         </ol>
+      </div>
+    </div>
+    <p class="screen__foot">青翎引路 · 人淀共生</p>
+  </section>
+
+  <!-- 02b 相册（导航「我们的调查 → 相册」的落点） -->
+  <section class="screen" id="album" aria-label="相册">
+    <div class="screen__grid">
+      <div>
+        <p class="section__index">02</p>
+        <h1 class="screen__title">相册</h1>
+      </div>
+      <div class="screen__body">
+        <p class="lead">实地拍摄的照片与影像记录，按时间或主题分组。首页底部那条滚动带也取自这里。</p>
+        <div class="gallery gallery--two screen__gallery">
+          <div class="slot slot--photo"><img src="assets/img/album-01.jpg" alt="白洋淀荷花" /></div>
+          <div class="slot slot--photo"><img src="assets/img/album-02.jpg" alt="" /></div>
+          <div class="slot slot--photo"><img src="assets/img/album-03.jpg" alt="" /></div>
+          <div class="slot slot--photo"><img src="assets/img/album-04.jpg" alt="" /></div>
+        </div>
+      </div>
+    </div>
+    <p class="screen__foot">青翎引路 · 人淀共生</p>
+  </section>
+
+  <!-- 04 白洋淀特色资源库 -->
+  <section class="screen screen--reading" id="resources" aria-label="白洋淀特色资源库">
+    <div class="reading">
+      <div class="resource">
+
+          <h2 class="resource__title">白洋淀文旅资源禀赋现状</h2>
+
+        <p class="resource__intro">白洋淀地处雄安新区腹地，是华北平原最大的淡水湖泊，总面积约 360 平方公里，由 140 多个大小不一的淀泊组成，素有“华北明珠”“华北之肾”之誉。2017 年雄安新区设立后，白洋淀成为生态治理的重点区域。通过实施清淤疏浚、百淀连通、退耕还淀、科学补水等系统性工程，白洋淀生态质量实现历史性跨越，为文旅融合发展提供了坚实的资源基础。</p>
+
+        <article class="rescard">
+          <header class="rescard__head">
+              <h3 class="rescard__title">生态湿地资源</h3>
+            <span class="rescard__tag">资源基底</span>
+          </header>
+
+          <ul class="stats">
+            <li><strong>12 万亩</strong><span>连绵芦苇荡</span></li>
+            <li><strong>296 种</strong><span>野生鸟类</span></li>
+            <li><strong>50 种</strong><span>野生鱼类</span></li>
+            <li><strong>Ⅲ 类</strong><span>水质连续 5 年</span></li>
+          </ul>
+
+          <div class="rescard__body">
+            <p>白洋淀湿地景观由大面积芦苇荡和纵横交错的水道构成，12 万亩芦苇荡连绵起伏，将水面分割成迂回曲折的水道。雄安新区设立前，白洋淀水质一度恶化，生物多样性面临危机。经过系统治理，自 2021 年起，白洋淀水质连续 5 年稳定保持在Ⅲ类标准，达到有监测记录以来最好水平。</p>
+            <p>生态治理带来生物多样性的显著回升。截至目前，白洋淀野生鸟类达 296 种，较新区设立前增加 90 种；野生鱼类恢复至 50 种。全球极危物种、“鸟中大熊猫”青头潜鸭已在白洋淀繁衍至百只左右。2024 年和 2025 年连续两年捕获到消失了 30 余年的细鳞斜颌鲴和花䱻，成为生态恢复的标志性见证。</p>
+          </div>
+        </article>
+
+        <article class="rescard">
+          <header class="rescard__head">
+              <h3 class="rescard__title">红色文化资源</h3>
+            <span class="rescard__tag">核心卖点</span>
+          </header>
+
+          <ul class="stats">
+            <li><strong>雁翎队</strong><span>水上抗日游击队</span></li>
+            <li><strong>雁翎队纪念馆</strong><span>雄安最大红色纪念馆</span></li>
+            <li><strong>嘎子村</strong><span>依托《小兵张嘎》IP</span></li>
+            <li><strong>徐光耀文学馆</strong><span>安新县红色场所</span></li>
+          </ul>
+
+          <div class="rescard__body">
+            <p>白洋淀红色文化资源以抗日战争时期的雁翎队为核心载体。雁翎队是中国共产党领导当地村民组成的水上抗日游击队，因“大抬杆”土枪点火口插上雁翎防止火药受潮而得名。雄安新区最大的红色文化纪念馆——白洋淀雁翎队纪念馆，是爱国主义教育基地，近年来加强“馆校共建”，开发系列微课，推出研学项目。</p>
+            <p>此外，安新县充分挖掘红色资源，建成开放嘎子村、徐光耀文学馆等场所，推出“沉浸式抗战情景剧”等体验项目。嘎子村依托《小兵张嘎》这一红色文学 IP，与雁翎队纪念馆等共同构成白洋淀红色文化旅游的重要载体。</p>
+          </div>
+        </article>
+
+        <article class="rescard">
+          <header class="rescard__head">
+              <h3 class="rescard__title">民俗非遗资源</h3>
+            <span class="rescard__tag">价值延伸</span>
+          </header>
+
+          <ul class="stats">
+            <li><strong>2009 年</strong><span>列入省级非遗</span></li>
+            <li><strong>十余道</strong><span>纯手工工序</span></li>
+            <li><strong>80 万元</strong><span>蒲草编织年销售额</span></li>
+            <li><strong>1500 余人</strong><span>带动加入产业链</span></li>
+          </ul>
+
+          <div class="rescard__body">
+            <p>白洋淀民俗文化以芦苇和蒲草为核心载体，形成“一淀芦苇一淀金”的生产生活方式。以白洋淀芦苇为原料制作的芦苇画，需经晒干、浸泡、剖开、压平等工序，再经整料、粘贴、修剪、烙烫、拼组、装裱等十余道纯手工工序方可完成。2009 年，白洋淀芦苇画被列入河北省非物质文化遗产项目；2024 年 5 月，白洋淀芦苇画《万里长城》亮相 2024 法国巴黎国际博览会。芦苇画非遗代表性传承人刘永乐依托这项非遗，发展文创产品、研学课堂，带动群众就业。</p>
+            <p>在安新县赵北口镇杨庄子村，传统蒲草编织工艺得到重拾。当地开办“创富工坊”，将蒲草编织成枕头、花瓶、灯罩等现代生活用品，运营一年多销售额突破 80 万元，带动 1500 多人加入蒲草编织上下游产业。</p>
+          </div>
+        </article>
+
+        <div class="summary">
+            <h3 class="summary__title">小结</h3>
+          <p>综上，白洋淀文旅资源呈现“<strong>生态＋红色＋民俗</strong>”三重叠加格局：生态湿地资源以其规模性和稀缺性构成<strong>资源基底</strong>；红色文化资源以其历史厚重感和排他性构成<strong>核心卖点</strong>；民俗非遗资源以其艺术转化能力和产业实践构成<strong>价值延伸载体</strong>。三类资源在空间上相互依存、在时间上层层积淀，共同构成了白洋淀文旅发展的资源禀赋底座。然而，这些资源目前仍处于相对分散的状态，如何将散点化的资源禀赋转化为系统化的文旅产品，实现资源的整合与价值转化，正是本调研的核心关切。</p>
+        </div>
+
+      </div>
+    </div>
+    <p class="screen__foot">青翎引路 · 人淀共生</p>
+  </section>
+
+  <!-- 05 青翎AI交互中心 -->
+    <section class="screen screen--reading" id="qingling" aria-label="青翎AI交互中心">
+      <div class="reading">
+        <div class="qling">
+
+          <div class="qling__stage">
+
+            <!-- 左：形象 -->
+            <div class="persona">
+              <div class="persona__switch" role="tablist" aria-label="青翎形态">
+                <button class="persona__btn is-active" type="button" data-form="classic" role="tab" aria-selected="true">古风形态</button>
+                <button class="persona__btn" type="button" data-form="tech" role="tab" aria-selected="false">科技形态</button>
+              </div>
+
+              <div class="persona__stage">
+                <img class="persona__img is-active" data-form="classic" src="assets/img/qingling-classic.png" alt="青翎 · 古风形态" width="880" height="880" />
+                <img class="persona__img" data-form="tech" src="assets/img/qingling-tech.png" alt="青翎 · 科技形态" width="900" height="900" />
+              </div>
+
+              <p class="persona__name">青翎</p>
+              <p class="persona__meta"><span id="personaForm">古风形态</span> · <span id="personaAudience">面向到访游客</span></p>
+              <p class="persona__desc" id="personaDesc">头戴苇编渔家大斗笠，背篓里驮着青头潜鸭，腰间别一枝红色雁翎。顶的是水乡百姓的装束，讲的是淀上的生活方式。</p>
+            </div>
+
+            <!-- 右：对话 -->
+            <div class="chatbox">
+              <div class="chatbox__head">
+                <span class="chatbox__avatar"><img id="chatAvatar" src="assets/img/qingling-classic.png" alt="" width="880" height="880" /></span>
+                <div class="chatbox__who">
+                  <b id="chatName">青翎 · 古风形态</b>
+                  <small id="chatStatus">演示模式 · 大模型尚未接入</small>
+                </div>
+                <span class="chatbox__dot" aria-hidden="true"></span>
+              </div>
+
+              <div class="chatbox__window" id="chatWindow" aria-live="polite">
+                <div class="msg msg--bot">你好，我是青翎。淀上的水路我熟，想先聊点什么？</div>
+              </div>
+
+              <div class="chatbox__asks" id="chatAsks"></div>
+
+              <form class="chatbox__input" id="chatForm">
+                <input type="text" id="chatText" placeholder="输入你的问题…" autocomplete="off" aria-label="输入你的问题" />
+                <button type="submit">发送</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <p class="screen__foot">青翎引路 · 人淀共生</p>
+    </section>
+
+  <!-- 07 团队介绍 -->
+  <section class="screen screen--reading" id="team" aria-label="团队介绍">
+    <div class="reading">
+      <div class="team">
+
+        <section class="team__block">
+          <h2 class="team__title">团队简介</h2>
+          <p class="team__lead">水韵经纬调研队，是诞生于河北师范大学的一支跨学科青年实践调研团队，团队打破单一专业壁垒，集合新闻学、广告学、软件工程、国际经济与贸易多个不同学科的青年学子，实现人文社科、技术开发、经济分析、新媒体创作能力的交叉互补，扎根雄安新区白洋淀这片“华北明珠”，以人淀共生为核心理念，行走苇荡淀泊之间，对话水乡烟火人间。“水韵”，取自白洋淀浩渺淀泊、芦荡摇曳的水乡气韵，承载湿地生态、雁翎红色记忆与渔家民俗烟火；“经纬”，代表青年学子以脚步丈量乡土大地，梳理淀区资源脉络，横向走访多元主体，纵向深挖时代命题，以青春力量探索促进淀区发展的新路径。我们坚持把调研做在田野，把论文写在淀边，用青年视角探索湿地生态保护、红色文化传承、渔家文旅融合的现实解法。团队围绕白洋淀散点化文旅资源困境，完成实证调研、深度访谈、数字方案构想、主题路线规划与新媒体内容创作，探索一套适配湿地保护区的轻量化文旅转型路径，力求为白洋淀文旅高质量发展输出青年思考，也为国内同类湿地型文旅目的地沉淀可借鉴的实践样本。</p>
+        </section>
+
+        <section class="team__block">
+          <h2 class="team__title">团队分工</h2>
+          <ul class="teamgrid">
+            <li>
+              <div class="teamcard__top"><span class="teamcard__name">李佳慧</span><span class="teamcard__role">负责人</span></div>
+              <span class="teamcard__major">广告学</span>
+              <p>统筹项目整体框架、对外对接，把控项目整体理念与成果质量，构建项目核心解决方案。</p>
+            </li>
+            <li>
+              <div class="teamcard__top"><span class="teamcard__name">隗米佳</span><span class="teamcard__role">调研策划</span></div>
+              <span class="teamcard__major">新闻学</span>
+              <p>负责调研问卷设计、实地执行统筹与后期数据清洗与分析，发掘问题。</p>
+            </li>
+            <li>
+              <div class="teamcard__top"><span class="teamcard__name">张怡晨</span><span class="teamcard__role">营销传播策划</span></div>
+              <span class="teamcard__major">广告学</span>
+              <p>探寻淀区增收区域发展可行的具体的轻量化路径，促进项目理念与方案的传播。</p>
+            </li>
+            <li>
+              <div class="teamcard__top"><span class="teamcard__name">杨佩绮</span><span class="teamcard__role">财务管理</span></div>
+              <span class="teamcard__major">国际经济与贸易</span>
+              <p>团队财务控制、方案可行性评估、产业盈利可行性预测</p>
+            </li>
+            <li>
+              <div class="teamcard__top"><span class="teamcard__name">王然</span><span class="teamcard__role">新媒体运营</span></div>
+              <span class="teamcard__major">广告学</span>
+              <p>运营项目账号，设计传播矩阵，宣传项目理念与淀区多元文化，负责新媒体运营方面的对外培训。</p>
+            </li>
+            <li>
+              <div class="teamcard__top"><span class="teamcard__name">裴浩阳</span><span class="teamcard__role">系统开发</span></div>
+              <span class="teamcard__major">软件工程</span>
+              <p>虚拟数字人“青翎”技术架构构想，小程序迭代，落地风险研判，实地数字化点位调研</p>
+            </li>
+            <li>
+              <div class="teamcard__top"><span class="teamcard__name">吴嘉贺</span><span class="teamcard__role">系统运维</span></div>
+              <span class="teamcard__major">软件工程</span>
+              <p>辅助系统开发技术落地，负责项目后期技术运营，促进系统升级。</p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="team__block">
+          <h2 class="team__title">我们做了什么</h2>
+          <div class="team__prose">
+            <p>怀抱着扎根乡土、知行致用的青年理想，团队分别于 2025、2026 年两个暑期，奔赴白洋淀开展两轮递进式实地调研，以青年脚步丈量苇荡淀泊，把课堂所学投射到水乡大地之上。首轮调研，团队探寻白洋淀码头、民俗古村、红色纪念场馆以及雄安新区悦容公园等多处阵地。我们走出书本象牙塔，走近游客、水乡居民与渔家商户，以问卷调研、深度访谈、实地沉浸式观察等方式，触摸白洋淀生态、红色、民俗文旅的真实肌理，记录水乡的烟火与困境，同步留存大量影像纪实素材，搭建新媒体传播阵地，完成基础田野资料的积淀，为课题研究筑牢现实根基。</p>
+            <p>在首轮调研积累之上，第二轮调研向着更深层次求索。团队回访各个经典调研点位，获取历时性的对比样本；同时拓宽调研版图，走进观鸟平台、生态科普场馆等地。迭代优化调研工具，将非遗手艺人、生态巡护员、码头从业者、基层管理工作者纳入访谈范畴，倾听更多元群体的心声，聚焦破解文旅资源散点化难题，挖掘大众对于智慧文旅、沉浸式体验的真实期盼。全程团队协同聚力，兼顾线下田野采集与线上舆情研判，将问卷、访谈实录、影像素材悉数整理归档，守护每一份来自乡土的珍贵声音。这些来自淀边的鲜活一手资料，成为我们提炼人淀共生核心理念、构想虚拟数字人智能体“青翎”、打造三条特色主题游览线路的坚实根基，努力交出一份属于新时代青年，回应乡土发展需求的实践答卷。</p>
+          </div>
+        </section>
+
+        <section class="team__block">
+          <h2 class="team__title">指导与支持</h2>
+          <div class="team__prose">
+            <p>本项目依托河北师范大学，由陈婧薇教授、马阳博士担任指导教师。指导老师深耕文化传播、媒介社会学、智能传播研究领域，在研究框架搭建、田野调研方法、理论结合乡土现实等方面给予团队专业引领，引导同学们将课堂专业理论投射到白洋淀真实的社会实践之中。连续两个暑期，团队奔赴雄安新区白洋淀，足迹覆盖王家寨、邵庄子、雁翎队纪念馆、缓冲区观鸟平台等十余处典型点位，在当地基层单位的理解与支持下，采集海量问卷、访谈与影像一手资料，为本项目全部研究成果打下坚实的现实根基。</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+    <p class="screen__foot">青翎引路 · 人淀共生</p>
+  </section>
+
+</main>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>
