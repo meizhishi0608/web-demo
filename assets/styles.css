@@ -2073,13 +2073,10 @@ body.is-leaving .hero__foot {
   cursor: zoom-in;
 }
 
-/* 宽屏时插图突破正文栏，方便看清图表里的字；
-   窄屏保持栏宽，点图可以打开原图。 */
-@media (min-width: 1320px) {
-  .reading .prose .figure {
-    margin-left: -110px;
-    margin-right: -110px;
-  }
+/* 插图一律收在正文栏宽度之内（宽屏也不再向两侧突破）；
+   图表里的字想看清，点一下图会打开原图。 */
+.reading .prose .figure {
+  max-width: 100%;
 }
 
 /* 枚举段落：不加项目符号，靠左侧一道细线成组，
