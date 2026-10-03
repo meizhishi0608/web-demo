@@ -499,11 +499,111 @@
       }, hold);
     }
 
+    function sayNextLine() {
+      var list = MASCOT_LINES[mascotForm];
+      mascotSay(list[mascotAt % list.length], MASCOT_HOLD_REPLY);
+      mascotAt += 1;
+    }
+
+    /* ---- 拖动 ----
+       她自己是静止的，默认停在右下角；按住可以拖到首页任意位置，松手就停在那儿。
+       只是点一下（没有拖动）才会说话。手机端整个功能关掉（见 styles.css 的 980px 断点）。 */
+    var mascotReel = document.querySelector(".reel");
+    var mascotMobile = window.matchMedia("(max-width: 980px)");
+    var placed = false;                 // 是否已从「右下角」换成 left/top 坐标
+    var dragging = false;
+    var dragMoved = false;
+    var skipClick = false;
+    var downX = 0, downY = 0, grabDX = 0, grabDY = 0;
+
+    /* left/top 是相对 .reel 的（它是 position:relative 的那个盒子），换算在函数里做 */
+    function placeMascot(left, top) {
+      var size = mascot.getBoundingClientRect();
+      var host = (mascotReel || document.body).getBoundingClientRect();
+      var margin = 6;
+      var minX = margin - host.left;
+      var minY = margin - host.top;
+      var maxX = window.innerWidth - size.width - margin - host.left;
+      var maxY = window.innerHeight - size.height - margin - host.top;
+      mascot.classList.add("is-placed");
+      mascot.style.left = Math.min(Math.max(minX, left), Math.max(minX, maxX)) + "px";
+      mascot.style.top = Math.min(Math.max(minY, top), Math.max(minY, maxY)) + "px";
+
+      /* 人在左半边就让气泡朝右展开，否则会伸到屏幕外面去 */
+      var rect = mascot.getBoundingClientRect();
+      mascot.classList.toggle("is-flip", rect.left + rect.width / 2 <= window.innerWidth / 2);
+      /* 人贴着顶边时，气泡改挂到下面，不然会顶出屏幕 */
+      var need = Math.max(mascotBubble ? mascotBubble.offsetHeight : 0, 112) + 18;
+      mascot.classList.toggle("is-below", rect.top < need);
+    }
+
+    function useLeftTop() {
+      if (placed || mascot.offsetParent === null) return;
+      var r = mascot.getBoundingClientRect();
+      var host = (mascotReel || document.body).getBoundingClientRect();
+      placed = true;
+      placeMascot(r.left - host.left, r.top - host.top);
+    }
+
+    function clampMascot() {
+      if (!placed) return;
+      placeMascot(parseFloat(mascot.style.left) || 0, parseFloat(mascot.style.top) || 0);
+    }
+
+    function applyMascot() {
+      if (mascotMobile.matches) {
+        /* 手机 / 平板：整个看板娘不出现 */
+        mascot.setAttribute("hidden", "");
+        return;
+      }
+      if (mascot.hasAttribute("hidden")) mascot.removeAttribute("hidden");
+      useLeftTop();
+      clampMascot();
+    }
+
     if (mascotBody) {
+      mascotBody.addEventListener("pointerdown", function (event) {
+        if (event.button && event.button !== 0) return;
+        var r = mascot.getBoundingClientRect();
+        dragging = true;
+        dragMoved = false;
+        downX = event.clientX;
+        downY = event.clientY;
+        grabDX = event.clientX - r.left;
+        grabDY = event.clientY - r.top;
+        mascot.classList.add("is-dragging");
+        if (mascotBody.setPointerCapture) {
+          try { mascotBody.setPointerCapture(event.pointerId); } catch (error) {}
+        }
+        event.preventDefault();
+      });
+
+      mascotBody.addEventListener("pointermove", function (event) {
+        if (!dragging) return;
+        if (Math.abs(event.clientX - downX) + Math.abs(event.clientY - downY) > 5) dragMoved = true;
+        var host = (mascotReel || document.body).getBoundingClientRect();
+        placeMascot(event.clientX - grabDX - host.left, event.clientY - grabDY - host.top);
+        event.preventDefault();
+      });
+
+      mascotBody.addEventListener("pointerup", function (event) {
+        if (!dragging) return;
+        dragging = false;
+        mascot.classList.remove("is-dragging");
+        if (mascotBody.releasePointerCapture) {
+          try { mascotBody.releasePointerCapture(event.pointerId); } catch (error) {}
+        }
+        if (dragMoved) skipClick = true;
+      });
+
+      mascotBody.addEventListener("pointercancel", function () {
+        dragging = false;
+        mascot.classList.remove("is-dragging");
+      });
+
       mascotBody.addEventListener("click", function () {
-        var list = MASCOT_LINES[mascotForm];
-        mascotSay(list[mascotAt % list.length], MASCOT_HOLD_REPLY);
-        mascotAt += 1;
+        if (skipClick) { skipClick = false; return; }
+        sayNextLine();
       });
     }
 
@@ -517,11 +617,14 @@
     }
 
     paintMascot();
-    mascot.removeAttribute("hidden");
+    applyMascot();
+    window.addEventListener("resize", applyMascot);
 
-    /* 进首页先打个招呼，5 秒后这句话自己消失，人留着 */
-    window.setTimeout(function () {
-      mascotSay(MASCOT_WELCOME, MASCOT_HOLD_WELCOME);
-    }, 600);
+    /* 进首页先打个招呼，5 秒后这句话自己消失，人留着（手机端不出现，也不说话） */
+    if (!mascotMobile.matches) {
+      window.setTimeout(function () {
+        mascotSay(MASCOT_WELCOME, MASCOT_HOLD_WELCOME);
+      }, 600);
+    }
   }
 })();
