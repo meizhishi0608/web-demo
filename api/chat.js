@@ -19,7 +19,7 @@ const PROVIDERS = {
   deepseek: {
     name: "DeepSeek",
     url: "https://api.deepseek.com/chat/completions",
-    key: process.env.DEEPSEEK_KEY,
+    key: "sk-9e4b61934a9d47e59c72f47e0415605a",
     /* DeepSeek 官方接口的模型 ID 只有这两个：
          deepseek-chat      —— 直接回答，快，适合这种游客问答（默认用这个）
          deepseek-reasoner  —— 先长篇推理再回答，更慢、更贵
