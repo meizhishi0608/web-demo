@@ -1277,7 +1277,8 @@ body.is-leaving .hero__foot {
   margin: 0;
   padding: 0;
   list-style: none;
-  animation: reelScroll 46s linear infinite;
+  /* 照片从 10 张增加到 21 张，时长按比例放大，滚动速度肉眼看上去和原来一致 */
+  animation: reelScroll 96s linear infinite;
   will-change: transform;
 }
 
