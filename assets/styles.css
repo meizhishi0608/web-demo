@@ -2306,6 +2306,7 @@ body.is-leaving .hero__foot {
 
 .chatbox__head {
   display: flex;
+  flex: none;
   align-items: center;
   gap: 12px;
   padding: 13px 18px;
@@ -2364,7 +2365,9 @@ body.is-leaving .hero__foot {
   flex: 1;
   flex-direction: column;
   gap: 10px;
-  min-height: 150px;
+  /* 消息区是唯一会让步的一块：头部、快捷提问、输入框高度固定，
+     屏幕变矮时只压缩这里，多出来的消息在内部滚动。 */
+  min-height: clamp(110px, 16vh, 150px);
   padding: 16px 18px;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -2382,6 +2385,7 @@ body.is-leaving .hero__foot {
 
 .chatbox__asks {
   display: flex;
+  flex: none;
   flex-wrap: wrap;
   gap: 7px;
   padding: 0 18px 12px;
@@ -2403,6 +2407,7 @@ body.is-leaving .hero__foot {
 
 .chatbox__input {
   display: flex;
+  flex: none;
   gap: 9px;
   padding: 0 18px 16px;
 }
@@ -2447,7 +2452,26 @@ body.is-leaving .hero__foot {
 @media (max-width: 900px) {
   .qling__stage { grid-template-columns: minmax(0, 1fr); }
   .persona__stage { max-width: 210px; }
-  .chatbox__window { min-height: 260px; }
+  .chatbox__window { min-height: min(40vh, 260px); }
+
+  /* 窄屏（形象与对话上下堆叠）：对话区最多占屏幕的七成高，
+     再多的消息在对话区内部滚动，不会让整页越拉越长。 */
+  .chatbox { max-height: min(70vh, 560px); }
+}
+
+/* 桌面版（左形象 / 右对话）：把这一条链上的高度都定下来，
+   否则消息一多，对话区会一条条把自己撑高、把整个栏目顶出屏幕，
+   而 .chatbox__window 自己的滚动条永远不会出现。 */
+@media (min-width: 901px) {
+  .qling { height: 100%; }
+  .qling__stage { grid-template-rows: minmax(0, 1fr); }
+}
+
+/* 桌面版（左形象 / 右对话）：这一行必须允许被压缩。
+   否则问题问多了，对话区会一条条把自己撑高、把整个栏目顶出屏幕，
+   而 .chatbox__window 自己的滚动条永远不会出现。 */
+@media (min-width: 901px) {
+  .qling__stage { grid-template-rows: minmax(0, 1fr); }
 }
 
 /* ================================================ 人淀共生理念专页 */
