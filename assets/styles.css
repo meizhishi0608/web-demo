@@ -3121,3 +3121,73 @@ html:has(.page-doc) { scroll-behavior: smooth; }
   .tabpanel { flex-direction: column; gap: 10px; }
   .doc-hero__stats { gap: 26px; }
 }
+
+/* =========================================================================
+   相册分页（content.html 的 #album）
+   每页 4 张、2 × 2 排布；只切换哪一页可见，页面本身依旧不滚动。
+   ========================================================================= */
+
+.album {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  margin-top: clamp(14px, 2.2vh, 26px);
+}
+
+.album .album__page {
+  flex: 1;
+  min-height: 0;
+  margin-top: 0;
+  /* 两行平均分掉这一栏的高度：窗口变矮时图片跟着缩，不会叠在一起、
+     也不会把下面的翻页条挤出去（原先按 4:3 定高，矮窗口下会溢出）。 */
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+/* .gallery 写了 display:grid，会盖掉浏览器默认的 [hidden] { display: none } */
+.album__page[hidden] { display: none; }
+
+/* 相册格交给「行高」决定尺寸，照片用 object-fit: cover 填满整格 */
+.album .album__page .slot { aspect-ratio: auto; }
+
+.pager {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: clamp(12px, 1.8vh, 18px);
+  padding-top: clamp(10px, 1.5vh, 15px);
+  border-top: 1px solid var(--rule);
+}
+
+.pager__btn {
+  padding: 8px 17px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--navy);
+  cursor: pointer;
+  transition: background-color 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+}
+
+.pager__btn:hover:not(:disabled) {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.pager__btn:disabled { opacity: 0.32; cursor: default; }
+
+.pager__status {
+  margin: 0;
+  min-width: 4.4em;
+  text-align: center;
+  font-family: var(--latin);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--mist);
+}

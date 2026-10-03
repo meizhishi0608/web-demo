@@ -349,4 +349,50 @@
     renderForm("classic");
     probeApi();
   }
+
+  /* ====================================== 相册分页（content.html 的 #album）
+     每页 4 张，只用「上一页 / 下一页」切换，不做无限滚动。 */
+  var album = document.querySelector("[data-album]");
+
+  if (album) {
+    var albumPages = Array.prototype.slice.call(album.querySelectorAll(".album__page"));
+    var albumPrev = album.querySelector("[data-album-prev]");
+    var albumNext = album.querySelector("[data-album-next]");
+    var albumStatus = album.querySelector("[data-album-status]");
+    var albumIndex = 0;
+
+    var renderAlbum = function () {
+      albumPages.forEach(function (page, index) {
+        if (index === albumIndex) {
+          page.removeAttribute("hidden");
+        } else {
+          page.setAttribute("hidden", "");
+        }
+      });
+
+      if (albumStatus) albumStatus.textContent = albumIndex + 1 + " / " + albumPages.length;
+      if (albumPrev) albumPrev.disabled = albumIndex === 0;
+      if (albumNext) albumNext.disabled = albumIndex === albumPages.length - 1;
+    };
+
+    if (albumPrev) {
+      albumPrev.addEventListener("click", function () {
+        if (albumIndex > 0) {
+          albumIndex -= 1;
+          renderAlbum();
+        }
+      });
+    }
+
+    if (albumNext) {
+      albumNext.addEventListener("click", function () {
+        if (albumIndex < albumPages.length - 1) {
+          albumIndex += 1;
+          renderAlbum();
+        }
+      });
+    }
+
+    renderAlbum();
+  }
 })();

@@ -289,11 +289,29 @@
       </div>
       <div class="screen__body">
         <p class="lead">实地拍摄的照片与影像记录，按时间或主题分组。首页底部那条滚动带也取自这里。</p>
-        <div class="gallery gallery--two screen__gallery">
-          <div class="slot slot--photo"><img src="assets/img/album-01.jpg" alt="白洋淀荷花" /></div>
-          <div class="slot slot--photo"><img src="assets/img/album-02.jpg" alt="" /></div>
-          <div class="slot slot--photo"><img src="assets/img/album-03.jpg" alt="" /></div>
-          <div class="slot slot--photo"><img src="assets/img/album-04.jpg" alt="" /></div>
+        <div class="album" data-album>
+          <div class="gallery gallery--two screen__gallery album__page" data-page="1">
+            <div class="slot slot--photo"><img src="assets/img/album-01.jpg" alt="白洋淀荷花" /></div>
+            <div class="slot slot--photo"><img src="assets/img/album-02.jpg" alt="" /></div>
+            <div class="slot slot--photo"><img src="assets/img/album-03.jpg" alt="" /></div>
+            <div class="slot slot--photo"><img src="assets/img/album-04.jpg" alt="" /></div>
+          </div>
+          <div class="gallery gallery--two screen__gallery album__page" data-page="2" hidden>
+            <div class="slot slot--photo"><img src="assets/img/album-05.jpg" alt="" /></div>
+            <div class="slot slot--photo"><img src="assets/img/album-06.jpg" alt="" /></div>
+            <div class="slot slot--photo"><img src="assets/img/album-07.jpg" alt="" /></div>
+            <div class="slot slot--photo"><img src="assets/img/album-08.jpg" alt="" /></div>
+          </div>
+          <div class="gallery gallery--two screen__gallery album__page" data-page="3" hidden>
+            <div class="slot slot--photo"><img src="assets/img/album-09.jpg" alt="" /></div>
+            <div class="slot slot--photo"><img src="assets/img/album-10.jpg" alt="" /></div>
+          </div>
+
+          <nav class="pager" aria-label="相册翻页">
+            <button class="pager__btn" type="button" data-album-prev>← 上一页</button>
+            <p class="pager__status" data-album-status aria-live="polite">1 / 3</p>
+            <button class="pager__btn" type="button" data-album-next>下一页 →</button>
+          </nav>
         </div>
       </div>
     </div>
