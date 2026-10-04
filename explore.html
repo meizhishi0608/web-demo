@@ -173,7 +173,7 @@
             <!-- ===== 友情链接：小圆章 + 悬停展开（临时整块，样式/结构/脚本都在这） ===== -->
       <style>
         .hub__pair { position: relative; }
-        .friendlinks { position: absolute; top: 5px; z-index: 7; }
+        .friendlinks { position: absolute; top: 5px; z-index: 7; padding-right: 12px; }
         .friendlinks__btn {
           display: flex; flex-direction: column; align-items: center; justify-content: center;
           width: clamp(46px, 3.4vw, 56px); height: clamp(46px, 3.4vw, 56px);
@@ -189,15 +189,15 @@
           box-shadow: 0 10px 22px rgba(22, 35, 63, .12); outline: none;
         }
         .friendlinks__panel {
-          position: absolute; left: calc(100% + 10px); top: -4px; width: 232px; padding: 8px;
+          position: absolute; left: 100%; top: -4px; width: 232px; padding: 8px;
           border: 1px solid rgba(22, 35, 63, .14); border-radius: 12px; background: #fff;
           box-shadow: 0 16px 34px rgba(22, 35, 63, .14);
           opacity: 0; visibility: hidden; transform: translateX(-8px);
-          transition: opacity .24s, transform .24s, visibility .24s; pointer-events: none;
+          transition: opacity .22s ease .15s, transform .22s ease .15s, visibility .22s ease .15s; pointer-events: none;
         }
         .friendlinks:hover .friendlinks__panel,
         .friendlinks:focus-within .friendlinks__panel {
-          opacity: 1; visibility: visible; transform: none; pointer-events: auto;
+          opacity: 1; visibility: visible; transform: none; pointer-events: auto;transition-delay: 0s;
         }
         .friendlinks__panel a {
           display: block; padding: 8px 10px; border-radius: 8px; font-size: 13px; line-height: 1.5;
