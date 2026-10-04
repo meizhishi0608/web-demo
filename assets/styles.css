@@ -3526,10 +3526,10 @@ html:has(.page-doc) { scroll-behavior: smooth; }
 
 .mascot__switch {
   position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 30px;
-  height: 30px;
+  top: -14px;
+  right: -17px;
+  width: 22px;
+  height: 22px;
   display: grid;
   place-items: center;
   padding: 0;
@@ -3543,7 +3543,7 @@ html:has(.page-doc) { scroll-behavior: smooth; }
 }
 
 .mascot__switch:hover { transform: scale(1.08); border-color: var(--rule-strong); }
-.mascot__switch svg { width: 16px; height: 16px; }
+.mascot__switch svg { width: 13px; height: 13px; }
 
 /* 说话的气泡：默认收起来，加 is-show 才出现；不吃鼠标事件，点穿它点到别处也没问题 */
 .mascot__bubble {
