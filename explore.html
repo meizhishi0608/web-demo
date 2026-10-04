@@ -170,6 +170,71 @@
     </section>
 
     <div class="hub__pair" id="qinglingCards">
+            <!-- ===== 友情链接：小圆章 + 悬停展开（临时整块，样式/结构/脚本都在这） ===== -->
+      <style>
+        .hub__pair { position: relative; }
+        .friendlinks { position: absolute; top: 5px; z-index: 7; }
+        .friendlinks__btn {
+          display: flex; flex-direction: column; align-items: center; justify-content: center;
+          width: clamp(46px, 3.4vw, 56px); height: clamp(46px, 3.4vw, 56px);
+          padding: 0; border: 1px solid rgba(22, 35, 63, .14); border-radius: 50%;
+          background: #fff; color: #2c3a55;
+          font-family: "Songti SC", "SimSun", serif;
+          font-size: clamp(12px, .85vw, 13.5px); line-height: 1.2; letter-spacing: .02em;
+          cursor: pointer; box-shadow: 0 6px 16px rgba(22, 35, 63, .06);
+          transition: border-color .25s, color .25s, transform .25s, box-shadow .25s;
+        }
+        .friendlinks__btn:hover, .friendlinks__btn:focus-visible {
+          border-color: rgba(22, 35, 63, .3); color: #16233f; transform: translateY(-2px);
+          box-shadow: 0 10px 22px rgba(22, 35, 63, .12); outline: none;
+        }
+        .friendlinks__panel {
+          position: absolute; left: calc(100% + 10px); top: -4px; width: 232px; padding: 8px;
+          border: 1px solid rgba(22, 35, 63, .14); border-radius: 12px; background: #fff;
+          box-shadow: 0 16px 34px rgba(22, 35, 63, .14);
+          opacity: 0; visibility: hidden; transform: translateX(-8px);
+          transition: opacity .24s, transform .24s, visibility .24s; pointer-events: none;
+        }
+        .friendlinks:hover .friendlinks__panel,
+        .friendlinks:focus-within .friendlinks__panel {
+          opacity: 1; visibility: visible; transform: none; pointer-events: auto;
+        }
+        .friendlinks__panel a {
+          display: block; padding: 8px 10px; border-radius: 8px; font-size: 13px; line-height: 1.5;
+          color: #2c3a55; text-decoration: none;
+          transition: background-color .2s, color .2s, padding-left .2s;
+        }
+        .friendlinks__panel a:hover { background: rgba(22, 35, 63, .05); color: #16233f; padding-left: 14px; }
+        @media (max-width: 980px) { .friendlinks { display: none; } }
+      </style>
+
+      <div class="friendlinks" id="friendLinks">
+        <button class="friendlinks__btn" type="button" aria-label="友情链接">友情<br />链接</button>
+        <div class="friendlinks__panel">
+          <a href="https://www.baiyangdianjingqu.com/" target="_blank" rel="noopener">白洋淀旅游景区</a>
+          <a href="https://www.hebtu.edu.cn/" target="_blank" rel="noopener">河北师范大学</a>
+          <a href="https://software.hebtu.edu.cn/" target="_blank" rel="noopener">河北师范大学软件学院</a>
+          <a href="https://xwcbxy.hebtu.edu.cn/" target="_blank" rel="noopener">河北师范大学新闻传播学院</a>
+          <a href="https://sxy.hebtu.edu.cn/" target="_blank" rel="noopener">河北师范大学商学院</a>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          var box = document.getElementById("friendLinks");
+          var pair = document.getElementById("qinglingCards");
+          if (!box || !pair) return;
+          function place() {
+            if (box.offsetParent === null) return;
+            var margin = Math.min(Math.max(12, window.innerWidth * 0.015), 30);
+            box.style.left = (margin - pair.getBoundingClientRect().left) + "px";
+          }
+          place();
+          window.addEventListener("resize", place);
+          window.addEventListener("load", place);
+        })();
+      </script>
+      <!-- ===== 友情链接 结束 ===== -->
 
       <a class="panel panel--link" href="articles/认识青翎.html">
         <span class="panel__head">
